@@ -1,6 +1,7 @@
 var http = require('http');
 var message = 'I am so happy to be part of the Node Girls workshop!';
 var fs = require('fs');
+var querystring = require('querystring');
 
 function handler(request, response){
     var endpoint = request.url;
@@ -15,6 +16,17 @@ function handler(request, response){
         if (err) {console.log(err);return}
         response.end(file);
       } );
+    } else if(endpoint === '/create-post'){
+        var allTheData = '';
+        request.on('data', function(chunkOfData){
+          allTheData += chunkOfData;
+        });
+        request.on('end',function(){
+          var convertedData = querystring.parse(allTheData);
+          console.log(convertedData);
+          response.writeHead(302, {'Location': './index.html'});
+          response.end();
+        });
     }
     else {
       response.writeHead(200,{"content-type":"text/" + extension});
@@ -23,17 +35,6 @@ function handler(request, response){
           response.end(file);
         });
       }
-      //
-      // var allTheData = '';
-      // request.on('data', function(chunkOfData){
-      //   allTheData += chunkOfData;
-      // });
-      //
-      // request.on('end',function(){
-      //
-      //   console.log(allTheData);
-      //   response.end();
-      // });
 }
 
 var server = http.createServer(handler);
