@@ -18,11 +18,22 @@ function handler(request, response){
     }
     else {
       response.writeHead(200,{"content-type":"text/" + extension});
-      fs.readFile(__dirname + '/public/'+ endpoint, function(err,file) {
+      fs.readFile(__dirname + '/public'+ endpoint, function(err,file) {
         if (err) {console.log(err);return}
           response.end(file);
         });
       }
+      //
+      // var allTheData = '';
+      // request.on('data', function(chunkOfData){
+      //   allTheData += chunkOfData;
+      // });
+      //
+      // request.on('end',function(){
+      //
+      //   console.log(allTheData);
+      //   response.end();
+      // });
 }
 
 var server = http.createServer(handler);
