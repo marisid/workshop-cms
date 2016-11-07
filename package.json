@@ -1,0 +1,19 @@
+{
+  "name": "workshop-cms",
+  "version": "1.0.0",
+  "description": "node-girls workshop to learn Node",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marisid/workshop-cms.git"
+  },
+  "author": "marisid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marisid/workshop-cms/issues"
+  },
+  "homepage": "https://github.com/marisid/workshop-cms#readme"
+}
