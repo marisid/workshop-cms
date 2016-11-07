@@ -5,6 +5,8 @@ var fs = require('fs');
 function handler(request, response){
     var endpoint = request.url;
     console.log(endpoint);
+    var extension = endpoint.split('.')[1];
+    console.log(extension);
     var method = request.method;
     console.log(method);
     if (endpoint === '/') {
@@ -14,12 +16,13 @@ function handler(request, response){
         response.end(file);
       } );
     }
-    else if (endpoint === "/girls") {
-      message = "We run the world! Girls!!!";
-      response.writeHead(200,{"content-type":"text/html"});
-      response.write(message);
-      response.end();
-    }
+    else {
+      response.writeHead(200,{"content-type":"text/" + extension});
+      fs.readFile(__dirname + '/public/'+ endpoint, function(err,file) {
+        if (err) {console.log(err);return}
+          response.end(file);
+        });
+      }
 }
 
 var server = http.createServer(handler);
