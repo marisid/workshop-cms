@@ -3,6 +3,7 @@ $(document).ready(function() {
         url: '/posts',
         dataType: 'json',
         success: function(data) {
+            console.log(data);
 
             for (var blogPost in data) {
                 var postDiv         = document.createElement('div');
@@ -18,7 +19,7 @@ $(document).ready(function() {
                 postDiv.appendChild(thumbnail);
                 postDiv.appendChild(postText);
                 postContainer.appendChild(postDiv);
-                
+
             }
         },
         error: function(error){
